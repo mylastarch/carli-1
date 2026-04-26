@@ -4,11 +4,15 @@ set -e -u
 
 # instructions on the making of the iso with this script
 
-sudo rm -r work/
-sudo fm -r out/
+if [ -d "work" ]; then
+  rm -rf -- "work"
+fi
+
+sudo rm -r out/
 
 mkarchiso -v -w /home/demo/ARCHLINUXISO/carli-1/work -o /home/demo/ARCHLINUXISO/carli-1/out /home/demo/ARCHLINUXISO/carli-1/
 
+# -v is verbose output to the screen
 # -w specifies the working directory. If the option is not specified, it will default to work in the current directory. If memory allows, it is preferred to place the working directory on tmpfs (as shown above) to speed up the process.
 # -r deletes the working directory (if it was created by mkarchiso) after successfully building the ISO.
 # -o specifies the directory where the built ISO image will be placed. If the option is not specified, it will default to out in the current directory.
